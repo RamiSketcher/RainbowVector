@@ -1,4 +1,4 @@
-name: rainbow-vector
+name: rainbow
 channels:
   - pytorch
 dependencies:
