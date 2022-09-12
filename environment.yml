@@ -1,7 +1,8 @@
-name: rainbow
+name: rainbow-vector
 channels:
   - pytorch
 dependencies:
+  - python=3.6
   - plotly
   - pytorch
   - tqdm
