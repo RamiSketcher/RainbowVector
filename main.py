@@ -73,6 +73,7 @@ metrics = {'steps': [], 'rewards': [], 'Qs': [], 'best_avg_reward': -float('inf'
 np.random.seed(args.seed)
 torch.manual_seed(np.random.randint(1, 10000))
 if torch.cuda.is_available() and not args.disable_cuda:
+  print('!CUDA!')
   args.device = torch.device('cuda')
   torch.cuda.manual_seed(np.random.randint(1, 10000))
   torch.backends.cudnn.enabled = args.enable_cudnn
