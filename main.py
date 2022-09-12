@@ -24,7 +24,7 @@ parser.add_argument('--id', type=str, default='default', help='Experiment ID')
 parser.add_argument('--seed', type=int, default=123, help='Random seed')
 parser.add_argument('--disable-cuda', action='store_true', help='Disable CUDA')
 parser.add_argument('--game', type=str, default='pong', choices=atari_py.list_games(), help='ATARI game')
-parser.add_argument('--T-max', type=int, default=int(1e5), metavar='STEPS', help='Number of training steps (4x number of frames)')
+parser.add_argument('--T-max', type=int, default=int(10e6), metavar='STEPS', help='Number of training steps (4x number of frames)')
 parser.add_argument('--max-episode-length', type=int, default=int(108e3), metavar='LENGTH', help='Max episode length in game frames (0 to disable)')
 parser.add_argument('--history-length', type=int, default=4, metavar='T', help='Number of consecutive states processed')
 parser.add_argument('--architecture', type=str, default='canonical', choices=['canonical', 'data-efficient'], metavar='ARCH', help='Network architecture')
@@ -48,13 +48,13 @@ parser.add_argument('--batch-size', type=int, default=32, metavar='SIZE', help='
 parser.add_argument('--norm-clip', type=float, default=10, metavar='NORM', help='Max L2 norm for gradient clipping')
 parser.add_argument('--learn-start', type=int, default=int(20e3), metavar='STEPS', help='Number of steps before starting training')
 parser.add_argument('--evaluate', action='store_true', help='Evaluate only')
-parser.add_argument('--evaluation-interval', type=int, default=20000, metavar='STEPS', help='Number of training steps between evaluations')
+parser.add_argument('--evaluation-interval', type=int, default=500000, metavar='STEPS', help='Number of training steps between evaluations')
 parser.add_argument('--evaluation-episodes', type=int, default=5, metavar='N', help='Number of evaluation episodes to average over')
 # TODO: Note that DeepMind's evaluation method is running the latest agent for 500K frames ever every 1M steps
 parser.add_argument('--evaluation-size', type=int, default=500, metavar='N', help='Number of transitions to use for validating Q')
 parser.add_argument('--render', action='store_true', help='Display screen (testing only)')
 parser.add_argument('--enable-cudnn', action='store_true', help='Enable cuDNN (faster but nondeterministic)')
-parser.add_argument('--checkpoint-interval', default=int(1e4), help='How often to checkpoint the model, defaults to 0 (never checkpoint)')
+parser.add_argument('--checkpoint-interval', default=int(1e5), help='How often to checkpoint the model, defaults to 0 (never checkpoint)')
 parser.add_argument('--memory', help='Path to save/load the memory from')
 parser.add_argument('--disable-bzip-memory', action='store_true', help='Don\'t zip the memory file. Not recommended (zipping is a bit slower and much, much smaller)')
 
@@ -73,7 +73,7 @@ metrics = {'steps': [], 'rewards': [], 'Qs': [], 'best_avg_reward': -float('inf'
 np.random.seed(args.seed)
 torch.manual_seed(np.random.randint(1, 10000))
 if torch.cuda.is_available() and not args.disable_cuda:
-  print('!CUDA!')
+  # print('!CUDA!')
   args.device = torch.device('cuda')
   torch.cuda.manual_seed(np.random.randint(1, 10000))
   torch.backends.cudnn.enabled = args.enable_cudnn
