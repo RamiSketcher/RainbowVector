@@ -4,7 +4,7 @@ import time, datetime
 from tqdm import tqdm, trange
 
 import numpy as np
-import gym
+# import gym
 import atari_py
 import wandb
 
