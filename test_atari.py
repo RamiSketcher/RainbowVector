@@ -18,9 +18,9 @@ def main(env, num, seed, device, wb, args):
     num_envs = num
     env_domain = 'Atari' # configurations['environment']['domain']
 
-    group_name = f"Mac-RV-{env_domain}-{env_name}-X{num_envs}"
-    # group_name = f"V-RV-{env_domain}-{env_name}-X{num_envs}"
-    # group_name = f"Q-RV-{env_domain}-{env_name}-X{num_envs}"
+    group_name = f"RV-Mac-{env_domain}-{env_name}-X{num_envs}"
+    # group_name = f"RV-V-{env_domain}-{env_name}-X{num_envs}"
+    # group_name = f"RV-Q-{env_domain}-{env_name}-X{num_envs}"
     exp_prefix = f"{group_name}-{alg_name}-seed:{seed}"
 
     print('=' * 50)
@@ -36,7 +36,7 @@ def main(env, num, seed, device, wb, args):
             project=f'RL-WC'
         )
 
-    LS = int(1e5)
+    LS = int(1e6)
 
     env = Env(args)
     env.train()
